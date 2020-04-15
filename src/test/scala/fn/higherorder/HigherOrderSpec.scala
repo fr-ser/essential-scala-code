@@ -1,8 +1,9 @@
 package fn.higherorder
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-import org.scalatest._
 
-class HigherOrderSpec extends FlatSpec with Matchers {
+class HigherOrderSpec extends AnyFlatSpec with Matchers {
   val ints = IntPair(1, IntPair(3, IntPair(5, IntNil())))
 
   "intList.exists" should "work as expected" in {

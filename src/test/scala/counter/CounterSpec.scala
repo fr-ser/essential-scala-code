@@ -1,8 +1,9 @@
 package counter
 
-import org.scalatest._
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-class CounterSpec extends FlatSpec with Matchers {
+class CounterSpec extends AnyFlatSpec with Matchers {
   // val counter = new Counter(123)
 
   "constructor" should "create a counter with the correct value" in {

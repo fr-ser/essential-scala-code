@@ -1,8 +1,9 @@
 package expr
 
-import org.scalatest._
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-class ExprSpec extends FlatSpec with Matchers {
+class ExprSpec extends AnyFlatSpec with Matchers {
   import Expr._
 
   "tacocat" should "be a palindrome" in {

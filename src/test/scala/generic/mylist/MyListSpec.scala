@@ -1,8 +1,10 @@
 package generic.mylist
 
-import org.scalatest._
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-class MyListSpec extends FlatSpec with Matchers {
+
+class MyListSpec extends AnyFlatSpec with Matchers {
   // val ints    = MyPair(1, MyPair(3, MyPair(5, MyNil())))
   // val strings = MyPair("foo", MyPair("bar", MyPair("baz", MyNil())))
 

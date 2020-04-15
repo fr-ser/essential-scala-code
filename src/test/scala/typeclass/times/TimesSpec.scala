@@ -1,8 +1,8 @@
 package typeclass.times
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-import org.scalatest._
-
-class TimesSpec extends FlatSpec with Matchers {
+class TimesSpec extends AnyFlatSpec with Matchers {
   import TimesImplicits._
 
   "times" should "accumulate a List[Int]" in {

@@ -1,8 +1,9 @@
 package typeclass.ordering
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-import org.scalatest._
 
-class OrderingSpec extends FlatSpec with Matchers {
+class OrderingSpec extends AnyFlatSpec with Matchers {
   import OrderingImplicits._
 
   val email1 = Email("z@example.com")

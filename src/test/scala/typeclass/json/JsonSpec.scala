@@ -1,8 +1,9 @@
 package typeclass.json
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-import org.scalatest._
 
-class JsonSpec extends FlatSpec with Matchers {
+class JsonSpec extends AnyFlatSpec with Matchers {
   import JsonImplicits._
 
   val alice  = Person("Alice", Email("alice@example.com"))

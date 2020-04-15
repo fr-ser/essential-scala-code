@@ -1,8 +1,9 @@
 package adt.json
 
-import org.scalatest._
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-class JsonSpec extends FlatSpec with Matchers {
+class JsonSpec extends AnyFlatSpec with Matchers {
   def json1 = ??? // "hello"
   def json2 = ??? // [1,2,3]
   def json3 = ??? // null

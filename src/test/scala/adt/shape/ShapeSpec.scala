@@ -1,8 +1,9 @@
 package adt.shape
 
-import org.scalatest._
 
-class ShapeSpec extends FlatSpec with Matchers {
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
+class ShapeSpec extends AnyFlatSpec with Matchers {
   // val shape1: Shape = Circle(10, Color(1, 0, 0))
   // val shape2: Shape = Rect(3, 5, Color(0, 1, 0))
 

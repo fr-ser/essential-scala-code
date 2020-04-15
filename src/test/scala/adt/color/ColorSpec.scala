@@ -1,12 +1,13 @@
 package adt.color
 
-import org.scalatest._
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-class ColorSpec extends FlatSpec with Matchers {
+class ColorSpec extends AnyFlatSpec with Matchers {
   "lightness" should "return the average of r, g, and b" in {
     pending
-    // val color = Color(.1, .2, .3)
-    // color.lightness should equal((color.r + color.g + color.b) / 3)
+    //val color = Color(.1, .2, .3)
+    //color.lightness should equal((color.r + color.g + color.b) / 3)
   }
 
   "lighterThan" should "identify that white is lighter than black" in {

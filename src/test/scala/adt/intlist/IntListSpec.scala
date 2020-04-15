@@ -1,8 +1,9 @@
 package adt.intlist
 
-import org.scalatest._
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-class IntListSpec extends FlatSpec with Matchers {
+class IntListSpec extends AnyFlatSpec with Matchers {
   // val ints = IntPair(1, IntPair(2, IntPair(3, IntNil())))
 
   "intList.contains" should "return true and false appropriately" in {

@@ -1,8 +1,10 @@
 package fn.firstorder
 
-import org.scalatest._
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-class FirstOrderSpec extends FlatSpec with Matchers {
+
+class FirstOrderSpec extends AnyFlatSpec with Matchers {
   import FirstOrder._
 
   "sumSquares" should "sum squares" in {

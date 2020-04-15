@@ -1,8 +1,10 @@
 package stdlib.film
 
-import org.scalatest._
+import org.scalatest.flatspec._
+import org.scalatest.matchers.should.Matchers
 
-class FilmSpec extends FlatSpec with Matchers {
+
+class FilmSpec extends AnyFlatSpec with Matchers {
   import TestData._
   import TestMethods._
 

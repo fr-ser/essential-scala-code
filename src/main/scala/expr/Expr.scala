@@ -32,7 +32,7 @@ object Expr {
 
   val operators4 = 123 + 456
   val operators5 = 123 + 456L
-  val operators6 = 123 + "456"
+  val operators6 = 123.toString + "456"
 
   //   ____                _                   _                         _ _
   //  / ___|___  _ __  ___| |_ _ __ _   _  ___| |_ ___  _ __    ___ __ _| | |___
