@@ -34,7 +34,7 @@ object Example1Expressions {
 
   val operators5 = 123 + 456
   val operators6 = 123 + 456L
-  val operators7 = 123 + "456"
+  val operators7 = 123.toString + "456"
 
   val operators8 = "a" == "a"
   val operators9 = "a" != "a"
