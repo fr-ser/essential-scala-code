@@ -10,14 +10,14 @@ object Example1Expressions {
   val literals1 = 123
   val literals2 = 123L
   val literals3 = 123.0
-  val literals4 = true
-  val literals5 = "a"
-  val literals6 = 'a'
+  val literals4: Boolean = true
+  val literals5: String = "a"
+  val literals6: Char = 'a'
 
-  val literals7 = """A string with "double quotes" in it"""
+  val literals7 = s"""A string with "double quotes" $literals1 in it"""
 
-  val literals8 = null
-  val literals9 = ()
+  val literals8: Null = null
+  val literals9: Unit = () // unit
 
   //   ___                       _
   //  / _ \ _ __   ___ _ __ __ _| |_ ___  _ __ ___
@@ -33,7 +33,7 @@ object Example1Expressions {
   val operators4 = true && !false
 
   val operators5 = 123 + 456
-  val operators6 = 123 + 456L
+  val operators6: Long = 123 + 456L
   val operators7 = 123.toString + "456"
 
   val operators8 = "a" == "a"
@@ -55,10 +55,19 @@ object Example1Expressions {
   def methodCalls5() = math.random
   def methodCalls6() = println("Hello world!")
 
+  def constant1(): String = "foo"
+  def constant2: String = "foo"
+
   val methodCalls7 = Math.random
   val methodCalls8 = List.apply(1, 2, 3)
 
-  val methodCalls9  = methodCalls8.head
+  def addMethod(x: Int, y: Int): Int = x + y
+
+  def addMethod2(x: Int): (Int => Int) = y => x + y
+
+  def addMethod3: Int => (Int => Int) = x => (y => x + y)
+
+  val methodCalls9 = methodCalls8.head
   val methodCalls10 = methodCalls8.tail
   val methodCalls11 = methodCalls8.apply(2)
 
@@ -74,6 +83,7 @@ object Example1Expressions {
 
   val infixOperators1 = 1 + 2
   val infixOperators2 = 1.+(2)
+
   val infixOperators3 = "Hello world".take(5)
   val infixOperators4 = "Hello world" take 5
 
@@ -85,8 +95,9 @@ object Example1Expressions {
   // | |__| (_) | | | | (_| | | |_| | (_) | | | | (_| | \__ \
   //  \____\___/|_| |_|\__,_|_|\__|_|\___/|_| |_|\__,_|_|___/
 
-  val conditionals1 = if(Math.random < 0.5) "Alien" else "Predator"
-  val conditionals2 = if(Math.random < 0.5) "Alien" else 2001
+  val conditionals1: String =
+    if (Math.random < 0.5) "Alien" else "Predator"
+  val conditionals2: Any = if (Math.random < 0.5) "Alien" else 2001
 
   //  ____  _            _
   // | __ )| | ___   ___| | _____
@@ -97,6 +108,10 @@ object Example1Expressions {
   def blocks1() = {
     println("Calculating the answer...")
     6 * 7
+  }
+
+  def withSideEffect(): Unit = {
+    ()
   }
 
   val blocks2 = {
@@ -170,7 +185,8 @@ object Example1Expressions {
   //                              |_|
 
   val puzzler1 = "Hello world!".toUpperCase.reverse
-  def puzzler2() = println("Hello world!".toUpperCase.reverse.toLowerCase.reverse)
+  def puzzler2() =
+    println("Hello world!".toUpperCase.reverse.toLowerCase.reverse)
 
   val puzzler3 = "Hello " + "world".take(2)
   val puzzler4 = "Hello " + "world" take 2
@@ -178,6 +194,8 @@ object Example1Expressions {
   def puzzler5 = "3".toInt
   def puzzler6 = "cake".toInt
 
-  def puzzler7 = if(math.random < 0.5) "Hello" else null
-  def puzzler8 = if(math.random < 0.5) "Hello" else throw new Exception("Aaargh!")
+  def puzzler7: String =
+    if (math.random < 0.5) ("Hello": String) else (null: Null)
+  def puzzler8: String =
+    if (math.random < 0.5) "Hello" else throw new Exception("Aaargh!")
 }

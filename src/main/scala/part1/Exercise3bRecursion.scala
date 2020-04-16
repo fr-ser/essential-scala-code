@@ -1,25 +1,34 @@
 package part1
 
 object Exercise3bRecursion {
-  def contains(numbers: List[Int], num: Int): Boolean = {
-    ???
-  }
+  def contains(numbers: List[Int], num: Int): Boolean =
+    if (numbers.isEmpty) false
+    else numbers.head == num || contains(numbers.tail, num)
 
-  def doubleEachNumber(numbers: List[Int]): List[Int] = {
-    ???
-  }
+  def doubleEachNumber(numbers: List[Int]): List[Int] =
+    numbers.map(x => x * 2)
+
+  def doubleEachNumberRec(numbers: List[Int]): List[Int] =
+    if (numbers.isEmpty) Nil
+    else numbers.head * 2 :: doubleEachNumberRec(numbers.tail)
 
   def total(numbers: List[Int]): Int = {
-    ???
+    if (numbers.isEmpty)
+      0
+    else
+      numbers.head + total(numbers.tail)
   }
 
-  def range(from: Int, to: Int): List[Int] = {
-    ???
-  }
+  def range(from: Int, to: Int): List[Int] =
+    if (from > to) Nil
+    else from :: range(from + 1, to)
 
-  def append(a: List[Int], b: List[Int]): List[Int] = {
-    ???
-  }
+  // ::/+: : (a: A, as: List[A]) => List[A] // prepend
+  // :+ : (as: List[A], a: A) => List[A] // append
+  // :::/++ <=> append
+  def append(a: List[Int], b: List[Int]): List[Int] =
+    if (a.isEmpty) b
+    else a.head :: append(a.tail, b)
 
   def main(args: Array[String]): Unit = {
     println("contains")

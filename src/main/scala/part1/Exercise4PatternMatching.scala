@@ -1,25 +1,38 @@
 package part1
 
 object Exercise4PatternMatching {
-  def greetNTimes(name: String, n: Int): Unit = {
-    ???
+  def greetNTimes(name: String, n: Int): Unit = n match {
+    case 0 => ()
+    case i =>
+      println(name)
+      greetNTimes(name, i - 1)
   }
 
-  def contains(numbers: List[Int], num: Int): Boolean = {
-    ???
+  // sealed trait List[A]
+  // case object Nil                                extends List[Nothing]
+  // final case class ::[A](head: A, tail: List[A]) extends List[A]
+
+  def contains(numbers: List[Int], num: Int): Boolean = numbers match {
+    case Nil          => false
+    case head :: tail => head == num || contains(tail, num)
+    // case x :: xs => x == num || (xs contains x)
   }
 
-  def doubleEachNumber(numbers: List[Int]): List[Int] = {
-    ???
+  def doubleEachNumber(numbers: List[Int]): List[Int] = numbers match {
+    case Nil          => Nil
+    case head :: tail => head * 2 :: doubleEachNumber(tail)
   }
 
-  def total(numbers: List[Int]): Int = {
-    ???
+  def total(numbers: List[Int]): Int = numbers match {
+    case Nil          => 0
+    case head :: tail => head + total(tail)
   }
 
-  def append(a: List[Int], b: List[Int]): List[Int] = {
-    ???
-  }
+  def append(first: List[Int], second: List[Int]): List[Int] =
+    first match {
+      case Nil          => second
+      case head :: tail => head :: append(tail, second)
+    }
 
   def main(args: Array[String]): Unit = {
     println("greetNTimes")
