@@ -8,36 +8,96 @@ object Exercise6Films {
   // The idea is to practice chaining methods together.
   // You DO NOT need to reference previous answers in later ones.
 
+  def flip[A, B, C](f: A => (B => C)): (B => (A => C)) =
+    (y: B) => (x: A) => f(x)(y)
+
   def nameOfFilm(film: Film): String = {
-    ???
+    film.name
   }
 
   def filmsByDirector(director: Director): List[Film] = {
-    ???
+    director.films
   }
 
-  def directorsWithBackCatalogOfSize(directors: List[Director], numberOfFilms: Int): List[Director] = {
-    ???
+  def directorsWithBackCatalogOfSize(
+      directors: List[Director],
+      numberOfFilms: Int
+  ): List[Director] = {
+    // directors.filter(hasMinFilms)(_)(numberOfFilms)
+    directors.filter(hasMinFilms(numberOfFilms))
   }
 
-  def directorsBornBefore(directors: List[Director], year: Int): List[Director] = {
-    ???
+  def directorsBornBefore(
+      directors: List[Director],
+      year: Int
+  ): List[Director] = {
+    directors.filter(bornBefore(year))
   }
 
-  def directorsBornBeforeWithBackCatalogOfSize(directors: List[Director], year: Int, numberOfFilms: Int): List[Director] = {
-    ???
+  val hasMinFilms: Int => (Director => Boolean) =
+    filmNumber => (director => director.films.length >= filmNumber)
+
+  val bornBefore: Int => (Director => Boolean) = year =>
+    director => director.yearOfBirth < year
+
+  type Predicate[A] = A => Boolean
+
+  def all[A](ps: Predicate[A]*): Predicate[A] = a => ps.forall(_(a))
+
+  def any[A](ps: Predicate[A]*): Predicate[A] = a => ps.exists(_(a))
+
+  def directorsBornBeforeWithBackCatalogOfSize(
+      directors: List[Director],
+      year: Int,
+      numberOfFilms: Int
+  ): List[Director] =
+    //directors.filter(all(hasMinFilms(numberOfFilms), bornBefore(year)))
+    directors.filter(all(hasMinFilms(numberOfFilms), bornBefore(year)))
+
+  def directorsBornBeforeWithBackCatalogOfSize1(
+      directors: List[Director],
+      year: Int,
+      numberOfFilms: Int
+  ): List[Director] = {
+    val bornBeforeWithBackCatalogOfSize: (Director => Boolean) = director =>
+      hasMinFilms(numberOfFilms)(director) && bornBefore(year)(director)
+
+    directors.filter(bornBeforeWithBackCatalogOfSize)
+  }
+
+  def directorsBornBeforeWithBackCatalogOfSize2(
+      directors: List[Director],
+      year: Int,
+      numberOfFilms: Int
+  ): List[Director] = {
+    val withBackCatalog: Int => List[Director] => List[Director] =
+      num => directors => directorsWithBackCatalogOfSize(directors, num)
+
+    val withBornBefore: Int => List[Director] => List[Director] =
+      year => directors => directorsBornBefore(directors, year)
+
+    val withBackCatalogAndBornBefore: List[Director] => List[Director] =
+      withBackCatalog(numberOfFilms) andThen withBornBefore(year)
+
+    withBackCatalogAndBornBefore(directors)
   }
 
   def namesOfFilms(films: List[Film]): List[String] = {
-    ???
+    // map(f: Film => String)
+    films.map(film => film.name)
   }
 
   def namesOfFilmsByDirector(director: Director): List[String] = {
-    ???
+    namesOfFilms(director.films)
   }
 
-  def namesOfFilmsByDirectorScoringAtLeast(director: Director, imdbRating: Double): List[String] = {
-    ???
+  def namesOfFilmsByDirectorScoringAtLeast(
+      director: Director,
+      imdbRating: Double
+  ): List[String] = {
+    director.films
+      .filter(film => film.imdbRating >= imdbRating)
+      .map(film => film.name)
   }
 
   def main(args: Array[String]): Unit = {

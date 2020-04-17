@@ -36,7 +36,7 @@ scalacOptions ++= Seq(
   "-Xlint:type-parameter-shadow", // A local type parameter shadows a type already in scope.
   "-Ywarn-dead-code", // Warn when dead code is identified.
   "-Ywarn-extra-implicit", // Warn when more than one implicit parameter section is defined.
-  "-Ywarn-numeric-widen", // Warn when numerics are widened.
+  //"-Ywarn-numeric-widen", // Warn when numerics are widened.
   // "-Ywarn-unused:implicits", // Warn if an implicit parameter is unused.
   // "-Ywarn-unused:imports", // Warn if an import selector is not referenced.
   // "-Ywarn-unused:locals", // Warn if a local definition is unused.
@@ -44,7 +44,8 @@ scalacOptions ++= Seq(
   // "-Ywarn-unused:patvars", // Warn if a variable bound in a pattern is unused.
   // "-Ywarn-unused:privates", // Warn if a private member is unused.
   // "-Ywarn-value-discard", // Warn when non-Unit expression results are unused.
-  "-Ybackend-parallelism", "8", // Enable paralellisation — change to desired number!
+  "-Ybackend-parallelism",
+  "8", // Enable paralellisation — change to desired number!
   "-Ycache-plugin-class-loader:last-modified", // Enables caching of classloaders for compiler plugins
-  "-Ycache-macro-class-loader:last-modified", // and macro definitions. This can lead to performance improvements.
+  "-Ycache-macro-class-loader:last-modified" // and macro definitions. This can lead to performance improvements.
 )

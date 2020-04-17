@@ -1,68 +1,77 @@
 import $ivy.`org.typelevel::cats-core:2.2.0-M1`
 import cats.implicits._
 
-val timesTwo = (x: Int) => x * 2
-val increment = (x: Int) => x + 1
+val x : Int = 5 
+val s : String = "Hello World"
 
-def compose(f: Int => Int, g: Int => Int): (Int => Int) = x => f(g(x))
+type MyProduct = (Int, String) // <-- this is called product type 
 
-def andThen(f: Int => Int, g: Int => Int): (Int => Int) = x => g(f(x))
+type MyProduct2 = (Boolean, Boolean)
+                //    2       2     =   2 * 2  = 4
+val distinctValues: List[MyProduct2] = List(
+  (true, false),
+  (false, true),
+  (false, false),
+  (true, true)
+ )
+// type Name = String 
+// type Age  = Int 
+// type Profession = String 
+//type Person = (Name, Age, Profession)   // A person  *has a* name *and* an age *and* a profession
 
-def applyTwice(f: Int => Int): (Int => Int) = x => f(f(x))
-val applyTwice2 = f => compose(f, f)
+type Name = String 
 
-val addTwo = applyTwice2(increment)
+type Person = (String, Int, String)   // A person  *has a* name *and* an age *and* a profession
 
-def add(x: Int, y: Int): Int = x + y
+val jan :  Person  = ("Hans", 25, "Software engineer")
 
-def add_(x: Int): Int => Int = (y: Int) => x + y
+println(jan._1)
+println(jan._2)
+println(jan._3)
 
-val addUncurried: (Int, Int) => Int = (x: Int, y: Int) => { x + y }
-val addCurried: Int => (Int => Int) = (x: Int) => { (y: Int) => x + y }
+case class Person2(name:String, age:Int, profession:String ) 
 
-// addUncurried(3,2) ===curry===> addCurried(3)(2)
-def curry(uncurried: (Int, Int) => Int): (Int => (Int => Int)) =
-  x => y => uncurried(x, y)
+// A person *has a* name *and* an age *and* a profession
 
-// addCurried(3)(2) ===uncurry===> addUncurried(3,2)
-def uncurry(curried: Int => (Int => Int)): (Int, Int) => Int =
-  (x, y) => curried(x)(y)
+val leif : Person2 = Person2("Franz", 18, "Software engineer")
 
-val addCurried2 = curry(addUncurried)
-val addUncurried2 = uncurry(addCurried)
+println(leif.profession)
+case class Point(x : Int, y : Int )
 
-println(addCurried2(10)(2))
-println(addUncurried2(10, 2))
+// TrafficLight -> Red | Yellow | Green  // enum-ishprev
+sealed trait TrafficLight   // Sum type 
+object Red extends TrafficLight
+object Yellow extends TrafficLight
+object Green extends TrafficLight
 
-// Uncurried
-List(1, 2, 3).map(y => addUncurried(5, y)) // add 5 to each element
 
-// Curried
-List(1, 2, 3).map(y => addCurried(5)(y)) /// add 5 to each element
-List(1, 2, 3).map(addCurried(5)(_))
+// *Is-a* relationship
+// TrafficLight *is* Red *or* Yellow *or* Green 
 
-val add3 = (x: Int, y: Int, z: Int) => x + y + z
+sealed trait Button
+object Pushed extends Button
+object NotPushed extends Button 
+// A button *is* Pushed *or* not Pushed 
 
-val result = add3(1, 2, 3)
+val pedestrian : TrafficLight = Red 
 
-val add3Curried = (x: Int) => (y: Int) => (z: Int) => x + y + z
-
-val result2 = add3Curried(1)(2)(3)
-
-def flip(f: Int => (String => String)): (String => (Int => String)) = {
-  val flipped = (y: String) => (x: Int) => f(x)(y)
-  flipped
+val result = pedestrian match {
+    case Green => "green"
+    case Red => "red"
+    /// case Yellow => "yellow" // Missing case will result in compile error
+    //case Defective => // error handling??
 }
+println(result)
 
-val toUpperIfGreaterTen = (x: Int) =>
-  (s: String) => if (x > 10) s.toUpperCase() else s
+// another file/class
+object HalfPushed extends Button // <- give an error 
 
-println(toUpperIfGreaterTen(11)("Hello World!"))
 
-val flipped = flip(toUpperIfGreaterTen)
+// Algebraic data types
+// Sum types aka Coproduct -> sealed traits -> is a relationship
+// Product typs -> tuple / case classes -> has a relationship
 
-println(flipped("Hello World!")(11))
+// |TrafficLight => Button| = |TrafficLight| ^ |Button|
+// 3 => 2 3 ^ 2 = 9
 
-val addSix: Int => Int = addCurried(5) andThen increment
-
-println(List(1, 2, 3).map(addSix))
+// "red" "green"
