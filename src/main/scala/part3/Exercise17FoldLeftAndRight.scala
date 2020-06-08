@@ -3,21 +3,18 @@ package part3
 import films.Film
 
 object Exercise17FoldLeftAndRight {
-  def totalImdbRating(films: List[Film]): Double = {
-    ???
-  }
+  def totalImdbRating(films: List[Film]): Double =
+    films.foldLeft(0.0)((accum, film) => accum + film.imdbRating)
 
-  def averageImdbRating(films: List[Film]): Double = {
-    ???
-  }
+  def averageImdbRating(films: List[Film]): Double =
+    totalImdbRating(films) / films.size
 
-  def reverseUsingFold[A](items: List[A]): List[A] = {
-    ???
-  }
+  def reverseUsingFold[A](items: List[A]): List[A] =
+    //items.foldRight(List.empty[A])((item, accum) => accum :+ item)
+    items.foldLeft[List[A]](Nil)((accum, element) => element :: accum)
 
-  def filterUsingFold[A](items: List[A], pred: A => Boolean): List[A] = {
-    ???
-  }
+  def filterUsingFold[A](items: List[A], pred: A => Boolean): List[A] =
+    items.foldRight(List.empty[A])((item, accum) => if (pred(item)) item :: accum else accum)
 
   def main(args: Array[String]): Unit = {
     import films.TestData._

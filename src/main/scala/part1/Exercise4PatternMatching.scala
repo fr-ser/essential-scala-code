@@ -30,7 +30,7 @@ object Exercise4PatternMatching {
 
   def append(first: List[Int], second: List[Int]): List[Int] =
     first match {
-      case Nil          => second
+      case empty @ Nil          => second
       case head :: tail => head :: append(tail, second)
     }
 

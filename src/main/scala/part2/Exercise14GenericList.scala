@@ -3,8 +3,91 @@ package part2
 // ----------------------------------------------
 
 // Step 1. Implement MyList[A] below
+// Any 
+// A 
+// Nothing 
 
-sealed abstract class MyList[A]
+sealed abstract class  MyList2[+A] // covariant B <: A => MyList[B] <: MyList[A]
+                    // MyList[A]  // invariance B <: A => 
+                    // MyList[-A]  // contravariance B <: A => MyList[B] :> MyList[A]
+case class MyPair2[A](head:A, tail:MyList2[A]) extends MyList2[A]
+case object MyNil2 extends MyList2[Nothing] 
+
+sealed abstract class  MyList3[-A] // covariant B <: A => MyList[B] <: MyList[A]
+                    // MyList[A]  // invariance B <: A => 
+                    // MyList[-A]  // contravariance B <: A => MyList[B] :> MyList[A]
+case class MyPair3[A](head:A, tail:MyList3[A]) extends MyList3[A]
+case object MyNil3 extends MyList3[Any] 
+
+// Nothing <: A  
+// MyList[Nothing] <: MyList[A]
+object Test {
+  val x : MyList2[Int] = MyNil2 : MyList2[Nothing] // MyList2[Nothing] <: MyList2[Int] - covariance 
+  val y : MyList3[Int] = MyNil3 : MyList3[Any] // MyList3[Any] <: MyList3[Int] - contravariance
+}
+
+sealed abstract class MyList[A] {
+  def exists2(predicate: A => Boolean): Boolean =
+    this match {
+      case MyNil()            => false
+      case MyPair(head, tail) => predicate(head) || tail.exists(predicate)
+    }
+
+  // List(1,2,3) => ( (false || predicate(1) ) || predicate(2) )  || predicate(3)
+  def exists(predicate: A => Boolean): Boolean = this.reduce2(false)((accum: Boolean, element: A) => accum || predicate(element))
+
+  def contains(elem: A): Boolean = this.exists(_ == elem)
+
+  def map[B](func: A => B): MyList[B] =
+    this match {
+      case MyNil()            => MyNil()
+      case MyPair(head, tail) => MyPair(func(head), tail.map(func))
+    }
+
+  def filter(predicate: A => Boolean): MyList[A] =
+    this match {
+      case MyNil() => MyNil()
+      case MyPair(head, tail) =>
+        if (predicate(head)) MyPair(head, tail.filter(predicate))
+        else tail.filter(predicate)
+    }
+
+  def reduce(empty: A, func: (A, A) => A): A =
+    this match {
+      case MyNil()            => empty
+      case MyPair(head, tail) => tail.reduce(func(empty, head), func)
+    }
+
+  def reduce2[B](empty: B)(func: (B, A) => B): B =
+    this match {
+      case MyNil()            => empty
+      case MyPair(head, tail) => tail.reduce2(func(empty, head))(func)
+    }
+
+  def append(list: MyList[A]): MyList[A] =
+    this match {
+      case MyNil()            => list
+      case MyPair(head, tail) => MyPair(head, tail.append(list))
+    }
+
+  // flatten : MyList[MyList[A]] => MyList[A]
+  // flatMap = nestedList // MyList[A]
+  //              .map(func) // MyList[MyList[A]]
+  //              .flatten // MyList[A]
+
+  def flatMap[B](func: A => MyList[B]): MyList[B] =
+    this match {
+      case MyNil()            => MyNil()
+      case MyPair(head, tail) => func(head).append(tail.flatMap(func))
+    }
+
+}
+case class MyPair[A](head: A, tail: MyList[A]) extends MyList[A]
+case class MyNil[A]()                          extends MyList[A]
+
+object MyList {
+  def apply[A](as: A*): MyList[A] = as.toList.foldRight(MyNil(): MyList[A])((a, acc) => MyPair(a, acc))
+}
 
 // Step 2. Implement the following methods
 // using methods from IntList as templates:
