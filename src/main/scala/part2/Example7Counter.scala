@@ -6,6 +6,10 @@ package part2
 
 // ----------------------------------------------
 
+case class Counter(value: Int) {
+  def increment = Counter(value + 1)
+}
+
 object Example7Counter {
   def main(args: Array[String]): Unit = {
     println("constructors")

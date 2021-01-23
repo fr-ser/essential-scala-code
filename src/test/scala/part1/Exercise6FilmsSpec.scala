@@ -8,22 +8,29 @@ class Exercise6FilmsSpec extends AnyFlatSpec with Matchers {
   import Exercise6Films._
 
   "nameOfFilm" should "work as expected" in {
-    pending
-    // nameOfFilm(memento) should equal(memento.name)
-    // nameOfFilm(darkKnight) should equal(darkKnight.name)
+    nameOfFilm(memento) should equal(memento.name)
+    nameOfFilm(darkKnight) should equal(darkKnight.name)
   }
 
   "filmsByDirector" should "work as expected" in {
-    pending
-    // filmsByDirector(nolan) should contain theSameElementsAs nolan.films
-    // filmsByDirector(eastwood) should contain theSameElementsAs eastwood.films
+    filmsByDirector(nolan) should contain theSameElementsAs nolan.films
+    filmsByDirector(eastwood) should contain theSameElementsAs eastwood.films
   }
 
   "directorsWithBackCatalogOfSize" should "work as expected" in {
     pending
-    // directorsWithBackCatalogOfSize(directors, 1) should contain theSameElementsAs List(eastwood, mcTiernan, nolan)
-    // directorsWithBackCatalogOfSize(directors, 4) should contain theSameElementsAs List(eastwood, mcTiernan)
-    // directorsWithBackCatalogOfSize(directors, 5) should contain theSameElementsAs List(eastwood)
+    // directorsWithBackCatalogOfSize(directors, 1) should contain theSameElementsAs List(
+    //   eastwood,
+    //   mcTiernan,
+    //   nolan
+    // )
+    // directorsWithBackCatalogOfSize(directors, 4) should contain theSameElementsAs List(
+    //   eastwood,
+    //   mcTiernan
+    // )
+    // directorsWithBackCatalogOfSize(directors, 5) should contain theSameElementsAs List(
+    //   eastwood
+    // )
     // directorsWithBackCatalogOfSize(Nil, 1) should contain theSameElementsAs Nil
   }
 

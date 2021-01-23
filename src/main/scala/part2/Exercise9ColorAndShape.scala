@@ -4,7 +4,25 @@ package part2
 
 // Write a definition for Color here!
 
+case class Color(r: Int, g: Int, b: Int)
+
 // Write definitions for Shape, Circle, and Rect here!
+
+sealed trait Shape {
+  def area = this match {
+    case Circle(r, _)  => r * r * math.Pi
+    case Rect(l, w, _) => (l * w).toDouble
+  }
+
+  def perimeter = this match {
+    case Circle(r, _)  => 2 * r * math.Pi
+    case Rect(l, w, _) => 2.0 * (l + w)
+  }
+
+  def color: Color
+}
+case class Circle(r: Int, override val color: Color) extends Shape
+case class Rect(l: Int, w: Int, override val color: Color) extends Shape
 
 // ----------------------------------------------
 

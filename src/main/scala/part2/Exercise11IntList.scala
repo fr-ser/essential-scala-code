@@ -4,6 +4,38 @@ package part2
 
 // Write a definition for IntList here!
 
+sealed trait IntList {
+  def contains(num: Int): Boolean = this match {
+    case IntNil()            => false
+    case IntPair(head, tail) => head == num || tail.contains(num)
+  }
+
+  def addToEach(num: Int): IntList = this match {
+    case IntNil()            => IntNil()
+    case IntPair(head, tail) => IntPair(head + num, tail.addToEach(num))
+  }
+
+  def total(): Int = this match {
+    case IntNil()            => 0
+    case IntPair(head, tail) => head + tail.total
+  }
+
+  def append(other: IntList): IntList = this match {
+    case IntNil()            => other
+    case IntPair(head, tail) => IntPair(head, tail.append(other))
+  }
+
+  def evensOnly(): IntList = this match {
+    case IntNil() => IntNil()
+    case IntPair(head, tail) =>
+      if (head % 2 == 0)
+        IntPair(head, tail.evensOnly())
+      else tail.evensOnly()
+  }
+}
+case class IntNil() extends IntList
+case class IntPair(head: Int, tail: IntList) extends IntList
+
 // Implement the following methods on IntList:
 // - def contains(num: Int): Boolean
 //   Does the list contain `num`?

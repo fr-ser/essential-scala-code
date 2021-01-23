@@ -8,23 +8,27 @@ object Exercise6Films {
   // The idea is to practice chaining methods together.
   // You DO NOT need to reference previous answers in later ones.
 
-  def nameOfFilm(film: Film): String = {
+  def nameOfFilm(film: Film): String = film.name
+
+  def filmsByDirector(director: Director): List[Film] = director.films
+
+  def directorsWithBackCatalogOfSize(
+      directors: List[Director],
+      numberOfFilms: Int
+  ): List[Director] = ???
+
+  def directorsBornBefore(
+      directors: List[Director],
+      year: Int
+  ): List[Director] = {
     ???
   }
 
-  def filmsByDirector(director: Director): List[Film] = {
-    ???
-  }
-
-  def directorsWithBackCatalogOfSize(directors: List[Director], numberOfFilms: Int): List[Director] = {
-    ???
-  }
-
-  def directorsBornBefore(directors: List[Director], year: Int): List[Director] = {
-    ???
-  }
-
-  def directorsBornBeforeWithBackCatalogOfSize(directors: List[Director], year: Int, numberOfFilms: Int): List[Director] = {
+  def directorsBornBeforeWithBackCatalogOfSize(
+      directors: List[Director],
+      year: Int,
+      numberOfFilms: Int
+  ): List[Director] = {
     ???
   }
 
@@ -36,7 +40,10 @@ object Exercise6Films {
     ???
   }
 
-  def namesOfFilmsByDirectorScoringAtLeast(director: Director, imdbRating: Double): List[String] = {
+  def namesOfFilmsByDirectorScoringAtLeast(
+      director: Director,
+      imdbRating: Double
+  ): List[String] = {
     ???
   }
 

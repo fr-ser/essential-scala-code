@@ -4,8 +4,36 @@ package part2
 
 // Step 1. Implement MyList[A] below
 
-sealed abstract class MyList[A]
+sealed trait MyList[A] {
+  def exists(check: A => Boolean): Boolean = this match {
+    case MyNil()            => false
+    case MyPair(head, tail) => check(head) || tail.exists(check)
+  }
 
+  def map[B](mapper: A => B): MyList[B] = this match {
+    case MyNil()            => MyNil()
+    case MyPair(head, tail) => MyPair(mapper(head), tail.map(mapper))
+  }
+
+  def reduce[B](zero: B, reducer: (B, A) => B): B = this match {
+    case MyNil()            => zero
+    case MyPair(head, tail) => tail.reduce(reducer(zero, head), reducer)
+  }
+
+  def append(other: MyList[A]): MyList[A] = this match {
+    case MyNil()            => other
+    case MyPair(head, tail) => MyPair(head, tail.append(other))
+  }
+
+  def filter(predicate: A => Boolean): MyList[A] = this match {
+    case MyNil() => MyNil()
+    case MyPair(head, tail) =>
+      if (predicate(head)) MyPair(head, tail.filter(predicate))
+      else tail.filter(predicate)
+  }
+}
+case class MyNil[A]() extends MyList[A]
+case class MyPair[A](head: A, tail: MyList[A]) extends MyList[A]
 // Step 2. Implement the following methods
 // using methods from IntList as templates:
 

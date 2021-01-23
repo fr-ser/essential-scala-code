@@ -1,29 +1,21 @@
 package part1
 
 object Exercise5Functions {
-  def contains(numbers: List[Int], num: Int): Boolean = {
-    ???
-  }
+  def contains(numbers: List[Int], num: Int): Boolean = numbers.contains(num)
 
-  def containsEvenNumbers(numbers: List[Int]): Boolean = {
-    ???
-  }
+  def containsEvenNumbers(numbers: List[Int]): Boolean =
+    numbers.exists(_ % 2 == 0)
 
-  def evenNumbersOnly(numbers: List[Int]): List[Int] = {
-    ???
-  }
+  def evenNumbersOnly(numbers: List[Int]): List[Int] =
+    numbers.filter(_ % 2 == 0)
 
-  def doubleEachNumber(numbers: List[Int]): List[Int] = {
-    ???
-  }
+  def doubleEachNumber(numbers: List[Int]): List[Int] = numbers.map(_ * 2)
 
-  def multiplyEachNumberBy(numbers: List[Int], num: Int): List[Int] = {
-    ???
-  }
+  def multiplyEachNumberBy(numbers: List[Int], num: Int): List[Int] =
+    numbers.map(_ * num)
 
-  def evenNumbersOnlyDoubled(numbers: List[Int]): List[Int] = {
-    ???
-  }
+  def evenNumbersOnlyDoubled(numbers: List[Int]): List[Int] =
+    numbers.filter(_ % 2 == 0).map(_ * 2)
 
   def main(args: Array[String]): Unit = {
     println("contains")

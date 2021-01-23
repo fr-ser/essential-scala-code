@@ -4,24 +4,29 @@ import films.{Director, Film}
 
 object Exercise19ForComprehensions {
   def filmsByDirector(director: Director): List[Film] = {
-    ???
+    for (f <- director.films) yield f
   }
 
   def namesOfFilmsByDirector(director: Director): List[String] = {
-    ???
+    for (f <- director.films) yield f.name
   }
 
   def filmsByAllDirectors(directors: List[Director]): List[Film] = {
-    ???
+    for (d <- directors;
+         f <- d.films) yield f
+
   }
 
   def namesOfFilmsByAllDirectors(directors: List[Director]): List[String] = {
-    ???
+    for (d <- directors;
+         f <- d.films) yield f.name
   }
 
   // Return a list of messages of the form "Tonight! <FILM> by <DIRECTOR>!"
   def tonightOnlyMessages(directors: List[Director]): List[String] = {
-    ???
+    for (d <- directors;
+         f <- d.films)
+      yield s"Tonight only! ${f.name} by ${d.firstName} ${d.lastName}!"
   }
 
   def main(args: Array[String]): Unit = {

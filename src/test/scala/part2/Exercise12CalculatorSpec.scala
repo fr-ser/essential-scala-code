@@ -4,20 +4,18 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 class Exercise12CalculatorSpec extends AnyFlatSpec with Matchers {
-  // val calc1 = Add(Num(1.1), Mul(Num(2.2), Num(3.3)))
-  // val calc2 = Mul(Add(Num(1.1), Num(2.2)), Num(3.3))
-  // val calc3 = Div(Num(1.0), Num(0.0))
-  // val calc4 = Sqrt(Num(-1.0))
+  val calc1 = Add(Num(1.1), Mul(Num(2.2), Num(3.3)))
+  val calc2 = Mul(Add(Num(1.1), Num(2.2)), Num(3.3))
+  val calc3 = Div(Num(1.0), Num(0.0))
+  val calc4 = Sqrt(Num(-1.0))
 
   "stringify" should "stringify an expression" in {
-    pending
-    // calc1.stringify should equal("1.1 + 2.2 * 3.3")
+    calc1.stringify should equal("1.1 + 2.2 * 3.3")
   }
 
   "Calculator.eval" should "return a double or some weird infinite thing" in {
-    pending
-    // Calculator.eval(calc1) should equal(1.1 + 2.2 * 3.3)
-    // Calculator.eval(calc2) should equal((1.1 + 2.2) * 3.3)
+    Calculator.eval(calc1) should equal(1.1 + 2.2 * 3.3)
+    Calculator.eval(calc2) should equal((1.1 + 2.2) * 3.3)
     // Calculator.eval(calc3).isPosInfinity should equal(true)
     // Calculator.eval(calc4).isNaN should equal(true)
   }

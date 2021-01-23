@@ -8,13 +8,33 @@ sealed abstract class JsValue
 
 // Include subtypes for each of the main types of JSON
 
+case class JsString(x: String) extends JsValue
+case class JsNumber(x: Double) extends JsValue
+case class JsArray(x: List[JsValue]) extends JsValue
+case class JsObject(x: List[(String, JsValue)]) extends JsValue
+case object JsNull extends JsValue {}
+
 // ----------------------------------------------
 
 // Step 2. Implement a `stringify` method on the companion object for `JsValue`
 
 object JsValue {
+  private def escapeString(s: String) =
+    s.flatMap(c => if (c == '"') s"\\$c" else c.toString())
+
   def stringify(json: JsValue): String = {
-    ???
+    json match {
+      case JsString(x) => s""""${escapeString(x)}""""
+      case JsNumber(x) => s"""$x"""
+      case JsArray(x)  => s"""[${x.map(stringify).mkString(",")}]"""
+      case JsObject(x) =>
+        s"""{${x
+          .map(keyValue =>
+            s""""${escapeString(keyValue._1)}":${stringify(keyValue._2)}"""
+          )
+          .mkString(",")}}"""
+      case JsNull => "null"
+    }
   }
 }
 

@@ -3,12 +3,29 @@ package part3
 import films.{Director, Film}
 
 object Exercise23HarderProblems {
-  def earliestFilmsByAllDirectors(directors: List[Director]): List[(Director, Option[Film])] = {
-    ???
+  def earliestFilmsByAllDirectors(
+      directors: List[Director]
+  ): List[(Director, Option[Film])] = {
+    directors.map(d =>
+      (d, d.films match {
+        case Nil               => None
+        case films: List[Film] => Some(films.sortBy(_.yearOfRelease).head)
+      })
+    )
   }
 
-  def earliestFilmsByAllDirectorsAsMap(directors: List[Director]): Map[Director, Option[Film]] = {
-    ???
+  def earliestFilmsByAllDirectorsAsMap(
+      directors: List[Director]
+  ): Map[Director, Option[Film]] = {
+    directors
+      .map(d =>
+        (d, d.films match {
+          case Nil               => None
+          case films: List[Film] => Some(films.sortBy(_.yearOfRelease).head)
+        })
+      )
+      .toMap
+
   }
 
   def averageImdbRatingAcrossDirectors(directors: List[Director]): Double = {
@@ -23,7 +40,10 @@ object Exercise23HarderProblems {
     ???
   }
 
-  def filmsByAllDirectorsSortedByDirectorNameAndImdb(directors: List[Director], asc: Boolean): List[Film] = {
+  def filmsByAllDirectorsSortedByDirectorNameAndImdb(
+      directors: List[Director],
+      asc: Boolean
+  ): List[Film] = {
     ???
   }
 
@@ -31,16 +51,16 @@ object Exercise23HarderProblems {
     import films.TestData._
 
     println("earliestFilmsByAllDirectors")
-    // earliestFilmsByAllDirectors(directors).foreach {
-    //   case (key, value) =>
-    //     println(key + " -> " + value)
-    // }
+    earliestFilmsByAllDirectors(directors).foreach {
+      case (key, value) =>
+        println(key.toString + " -> " + value)
+    }
 
     println("earliestFilmsByAllDirectorsAsMap")
-    // earliestFilmsByAllDirectorsAsMap(directors).foreach {
-    //   case (key, value) =>
-    //     println(key + " -> " + value)
-    // }
+    earliestFilmsByAllDirectorsAsMap(directors).foreach {
+      case (key, value) =>
+        println(key.toString + " -> " + value)
+    }
 
     println("averageImdbRatingAcrossDirectors")
     // println(averageImdbRatingAcrossDirectors(directors))

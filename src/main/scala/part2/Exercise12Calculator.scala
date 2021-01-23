@@ -4,8 +4,39 @@ package part2
 
 // Step 1. Write a definition for Expr here!
 
-sealed abstract class Expr
+// sealed abstract class Expr {
+//   def stringify: String
+//   def eval: Double
+// }
+// case class Num(a: Double) extends Expr {
+//   def stringify: String = a.toString
+//   def eval = a
+// }
+// case class Add(a: Expr, b: Expr) extends Expr {
+//   def stringify: String = s"${a.stringify} + ${b.stringify}"
+//   def eval = a.eval + b.eval
 
+// }
+// case class Sub(a: Expr, b: Expr) extends Expr {
+//   def stringify: String = s"${a.stringify} - ${b.stringify}"
+//   def eval = a.eval - b.eval
+
+// }
+// case class Mul(a: Expr, b: Expr) extends Expr {
+//   def stringify: String = s"${a.stringify} * ${b.stringify}"
+//   def eval = a.eval * b.eval
+
+// }
+// case class Div(a: Expr, b: Expr) extends Expr {
+//   def stringify: String = s"${a.stringify} / ${b.stringify}"
+//   def eval = a.eval / b.eval
+
+// }
+// case class Sqrt(a: Expr) extends Expr {
+//   def stringify: String = s"${a.stringify}^(1/2)"
+//   def eval = math.sqrt(a.eval)
+
+// }
 // Handle the following types of equation:
 // - addition
 // - subtraction
@@ -22,9 +53,7 @@ sealed abstract class Expr
 // for each of the "calculator" objects below:
 
 object Calculator {
-  def eval(calc: Expr): Double = {
-    ???
-  }
+  def eval(calc: Expr): Double = ???
 }
 
 object IntCalculator {
@@ -40,15 +69,15 @@ object IntCalculator {
 
 // ----------------------------------------------
 
-object Expr {
-  // def pythag(a: Double, b: Double): Expr = {
-  //   ???
-  // }
+// object Expr {
+// def pythag(a: Double, b: Double): Expr = {
+//   ???
+// }
 
-  // def factorial(n: Int): Expr = {
-  //   ???
-  // }
-}
+// def factorial(n: Int): Expr = {
+//   ???
+// }
+// }
 
 object Exercise11Calculator {
   // val calc1 = Add(Num(1.1), Mul(Num(2.2), Num(3.3)))

@@ -4,6 +4,28 @@ package part2
 
 // Write your Vec class (and companion object) here!
 
+case class Vec(x: Int, y: Int) {
+  def length = math.sqrt((x * x).toDouble + (y * y).toDouble)
+
+  def +(other: Vec) = Vec(x + other.x, y + other.y)
+
+  def *(num: Int) = Vec(x * num, y * num)
+}
+
+object Vec {
+  def zero = Vec(0, 0)
+  def unitX = Vec(1, 0)
+  def unitY = Vec(0, 1)
+
+  def longest(a: Vec, b: Vec) = if (a.length >= b.length) a else b
+
+  def longest(vectors: List[Vec]): Vec = vectors match {
+    case Nil                         => zero
+    case head :: next if next == Nil => head
+    case head :: next if next != Nil => longest(head, longest(next))
+  }
+}
+
 // ----------------------------------------------
 
 object Exercise8Vec {

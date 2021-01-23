@@ -5,18 +5,12 @@ object Exercise2Expressions {
     ???
   }
 
-  def greeting(name: String): String = {
-    ???
-  }
+  def greeting(name: String): String = s"Hello $name!"
 
   // Hint - You can reverse a string with `string.reverse`
-  def palindrome(str: String): Boolean = {
-    ???
-  }
+  def palindrome(str: String): Boolean = str == str.reverse
 
-  def factorial(n: Int): Int = {
-    ???
-  }
+  def factorial(n: Int): Int = if (n < 2) n else n * factorial(n - 1)
 
   def main(args: Array[String]): Unit = {
     println("greet")
